@@ -22,7 +22,8 @@ defmodule UeberauthTruelayer.MixProject do
   defp deps do
     [
       {:ueberauth, "~> 0.10"},
-      {:oauth2, "~> 1.0 or ~> 2.0"}
+      {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 end
