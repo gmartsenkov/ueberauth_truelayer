@@ -15,6 +15,21 @@ def deps do
 end
 ```
 
+## Usage
+```elixir
+config :ueberauth, Ueberauth.Strategy.TrueLayer.OAuth,
+  client_id: "client_id",
+  client_secret: "client_secret"
+
+config :ueberauth, Ueberauth,
+  base_path: "/",
+  providers: [
+    truelayer: {Ueberauth.Strategy.TrueLayer, [
+      default_providers: "uk-cs-mock uk-ob-all uk-oauth-all"
+    ]}
+  ]
+```
+
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/ueberauth_truelayer>.

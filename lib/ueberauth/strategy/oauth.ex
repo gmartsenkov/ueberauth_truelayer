@@ -5,8 +5,7 @@ defmodule Ueberauth.Strategy.TrueLayer.OAuth do
   Add `:client_id` and `:client_secret` to your configuration:
       config :ueberauth, Ueberauth.Strategy.TrueLayer.OAuth,
         client_id: System.get_env("TRUELAYER_CLIENT_ID"),
-        client_secret: System.get_env("TRUELAYER_CLIENT_SECRET"),
-        authorize_url: "https://auth.truelayer-sandbox.com"
+        client_secret: System.get_env("TRUELAYER_CLIENT_SECRET")
 
   """
   use OAuth2.Strategy
@@ -15,9 +14,8 @@ defmodule Ueberauth.Strategy.TrueLayer.OAuth do
     strategy: __MODULE__,
     client_id: "id",
     client_secret: "secret",
-    site: "https://auth.truelayer.com",
-    authorize_url: "https://auth.truelayer-sandbox.com",
-    token_url: "https://auth.truelayer-sandbox.com/connect/token",
+    authorize_url: "https://auth.truelayer.com",
+    token_url: "https://auth.truelayer.com/connect/token",
     token_method: :post
   ]
 
