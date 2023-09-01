@@ -16,10 +16,14 @@ end
 ```
 
 ## Usage
+Example setup for Truelayer's test environment
+
 ```elixir
 config :ueberauth, Ueberauth.Strategy.TrueLayer.OAuth,
   client_id: "client_id",
-  client_secret: "client_secret"
+  client_secret: "client_secret",
+  authorize_url: "https://auth.truelayer-sandbox.com",
+  token_url: "https://auth.truelayer-sandbox.com/connect/token"
 
 config :ueberauth, Ueberauth,
   base_path: "/",
