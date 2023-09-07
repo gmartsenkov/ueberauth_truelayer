@@ -14,6 +14,7 @@ defmodule Ueberauth.Strategy.TrueLayer.OAuth do
     strategy: __MODULE__,
     client_id: "id",
     client_secret: "secret",
+    site: "https://api.truelayer.com",
     authorize_url: "https://auth.truelayer.com",
     token_url: "https://auth.truelayer.com/connect/token",
     token_method: :post

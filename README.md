@@ -22,6 +22,7 @@ Example setup for Truelayer's test environment
 config :ueberauth, Ueberauth.Strategy.TrueLayer.OAuth,
   client_id: "client_id",
   client_secret: "client_secret",
+  site: "https://api.truelayer-sandbox.com",
   authorize_url: "https://auth.truelayer-sandbox.com",
   token_url: "https://auth.truelayer-sandbox.com/connect/token"
 

@@ -4,7 +4,8 @@ defmodule Ueberauth.Strategy.TrueLayer do
   """
 
   use Ueberauth.Strategy,
-    default_scope: "accounts balance cards direct_debits info offline_access standing_orders transactions",
+    default_scope:
+      "accounts balance cards direct_debits info offline_access standing_orders transactions",
     default_providers: "uk-ob-all uk-oauth-all",
     uid_field: :id,
     response_type: "code",
@@ -39,7 +40,10 @@ defmodule Ueberauth.Strategy.TrueLayer do
 
     try do
       client = Ueberauth.Strategy.TrueLayer.OAuth.get_token!([code: code], opts)
-      put_private(conn, :truelayer_token, client.token)
+
+      conn
+      |> put_private(:truelayer_token, client.token)
+      |> fetch_info(client)
     rescue
       e -> set_errors!(conn, [error("get_token_error", e)])
     end
@@ -95,10 +99,18 @@ defmodule Ueberauth.Strategy.TrueLayer do
   """
   def extra(conn) do
     %Extra{
-      raw_info: %{
-        token: conn.private.truelayer_token,
-      }
+      raw_info: Map.merge(%{
+        token: conn.private.truelayer_token
+      }, conn.private.truelayer_info_data)
     }
+  end
+
+  def fetch_info(conn, client) do
+    case OAuth2.Client.get(client, "/data/v1/me") do
+      {:ok, %OAuth2.Response{status_code: 200, body: %{"results" => [data]}}} ->
+        put_private(conn, :truelayer_info_data, data)
+      _ -> set_errors!(conn, [error("get_user_error", "User fetch failed")])
+    end
   end
 
   defp option(conn, key) do
